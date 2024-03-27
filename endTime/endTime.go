@@ -77,7 +77,39 @@ func gett(t time.Time) countdown {
 }
 
 func main() {
+	// 获取当前时间
+	now := time.Now()
+	var a int
 
-	fmt.Println(inputTime())
+	fmt.Scan(&a)
+	//fmt.Println(a)
 
+	//v := inputTime()
+	//timeStr := v.Format("2006-01-02 15:04:05")
+	// 设置目标时间为每天的 18:30
+	target := time.Date(now.Year(), now.Month(), now.Day(), a, 0, 0, 0, now.Location())
+
+	// 如果当前时间晚于目标时间，则目标时间延后一天
+	/*	if now.After(target) {
+		target = target.AddDate(0, 0, 1)
+	}*/
+
+	// 计算倒计时时间
+
+	for {
+		duration := target.Sub(now)
+
+		time.Sleep(1 * time.Second)
+		now = time.Now()
+		target = target.Add(1 * time.Second)
+		if duration <= 0 {
+			fmt.Println("倒计时结束")
+			break
+		}
+		fmt.Println("倒计时:", duration)
+		// 输出倒计时时间
+
+		//fmt.Println("倒计时:", duration)
+
+	}
 }
